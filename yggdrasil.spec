@@ -5,10 +5,10 @@ Summary:        End-to-end encrypted IPv6 networking
 
 License:        GPLv3
 URL:            https://yggdrasil-network.github.io
-Source0:        https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.gz/v0.3.5
+Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.gz/v%{version}
 
 %{?systemd_requires}
-BuildRequires:  systemd golang >= 1.11
+BuildRequires:  systemd golang >= 1.11 git
 
 %description
 Yggdrasil is a proof-of-concept to explore a wholly different approach to
@@ -20,7 +20,10 @@ use of a global spanning tree to form a scalable IPv6 encrypted mesh network.
 %setup -qn yggdrasil-go-%{version}
 
 %build
-PKGNAME=%{name} PKGVER=%{version} ./build -t -l "-linkmode=external"
+export PKGSRC="github.com/yggdrasil-network/yggdrasil-go/src/yggdrasil"
+export PKGNAME="%{name}"
+export PKGVER="%{version}"
+./build -t -l "-linkmode=external"
 
 %install
 rm -rf %{buildroot}
@@ -29,13 +32,11 @@ mkdir -p %{buildroot}/%{_sysconfdir}/systemd/system
 install -m 0755 yggdrasil %{buildroot}/%{_bindir}/yggdrasil
 install -m 0755 yggdrasilctl %{buildroot}/%{_bindir}/yggdrasilctl
 install -m 0755 contrib/systemd/yggdrasil.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil.service
-install -m 0755 contrib/systemd/yggdrasil-resume.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil-resume.service
 
 %files
 %{_bindir}/yggdrasil
 %{_bindir}/yggdrasilctl
 %{_sysconfdir}/systemd/system/yggdrasil.service
-%{_sysconfdir}/systemd/system/yggdrasil-resume.service
 
 %post
 %systemd_post yggdrasil.service
