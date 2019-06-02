@@ -1,6 +1,6 @@
 Name:           yggdrasil
 Version:        0.3.5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
 License:        GPLv3
@@ -9,12 +9,17 @@ Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.g
 
 %{?systemd_requires}
 BuildRequires:  systemd golang >= 1.11 git
+Requires(pre): shadow-utils
 
 %description
 Yggdrasil is a proof-of-concept to explore a wholly different approach to
 network routing. Whereas current computer networks depend heavily on very
 centralised design and configuration, Yggdrasil breaks this mould by making
 use of a global spanning tree to form a scalable IPv6 encrypted mesh network.
+
+%pre
+getent group yggdrasil >/dev/null || groupadd -r yggdrasil
+exit 0
 
 %prep
 %setup -qn yggdrasil-go-%{version}
