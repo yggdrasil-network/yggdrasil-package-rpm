@@ -1,6 +1,6 @@
 Name:           yggdrasil
 Version:        0.3.5
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
 License:        GPLv3
@@ -9,7 +9,8 @@ Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.g
 
 %{?systemd_requires}
 BuildRequires:  systemd golang >= 1.11 git
-Requires(pre): shadow-utils
+Requires(pre):  shadow-utils
+Conflicts:      yggdrasil-develop
 
 %description
 Yggdrasil is a proof-of-concept to explore a wholly different approach to
