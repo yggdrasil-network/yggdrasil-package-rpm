@@ -18,6 +18,8 @@ network routing. Whereas current computer networks depend heavily on very
 centralised design and configuration, Yggdrasil breaks this mould by making
 use of a global spanning tree to form a scalable IPv6 encrypted mesh network.
 
+%define debug_package %{nil}
+
 %pre
 getent group yggdrasil >/dev/null || groupadd -r yggdrasil
 exit 0
