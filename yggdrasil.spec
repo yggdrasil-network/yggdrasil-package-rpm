@@ -36,15 +36,15 @@ export PKGVER="%{version}"
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/%{_bindir}
-mkdir -p %{buildroot}/%{_sysconfdir}/systemd/system
+mkdir -p %{buildroot}/%{_unitdir}
 install -m 0755 yggdrasil %{buildroot}/%{_bindir}/yggdrasil
 install -m 0755 yggdrasilctl %{buildroot}/%{_bindir}/yggdrasilctl
-install -m 0755 contrib/systemd/yggdrasil.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil.service
+install -m 0755 contrib/systemd/yggdrasil.service %{buildroot}/%{_unitdir}/yggdrasil.service
 
 %files
 %{_bindir}/yggdrasil
 %{_bindir}/yggdrasilctl
-%{_sysconfdir}/systemd/system/yggdrasil.service
+%{_unitdir}/yggdrasil.service
 
 %post
 %systemd_post yggdrasil.service
