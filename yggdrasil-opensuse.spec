@@ -1,6 +1,6 @@
 Name:           yggdrasil
 Version:        0.3.14
-Release:        3
+Release:        4
 Summary:        End-to-end encrypted IPv6 networking
 
 License:        GPL-3.0-only
@@ -39,11 +39,14 @@ rm -rf %{buildroot}
 install -m 0755 -D yggdrasil %{buildroot}/%{_bindir}/yggdrasil
 install -m 0755 -D yggdrasilctl %{buildroot}/%{_bindir}/yggdrasilctl
 install -m 0644 -D contrib/systemd/yggdrasil.service %{buildroot}%{_prefix}/lib/systemd/system/yggdrasil.service
+mkdir -p %{buildroot}%{_sbindir}
+ln -sf service %{buildroot}%{_sbindir}/rcyggdrasil
 
 %files
 %{_bindir}/yggdrasil
 %{_bindir}/yggdrasilctl
 %{_prefix}/lib/systemd/system/yggdrasil.service
+%{_sbindir}/rcyggdrasil
 
 %pre
 getent group yggdrasil >/dev/null || groupadd -r yggdrasil
