@@ -1,6 +1,6 @@
 Name:           yggdrasil
 Version:        0.3.14
-Release:        4
+Release:        6
 Summary:        End-to-end encrypted IPv6 networking
 
 License:        GPL-3.0-only
@@ -32,7 +32,8 @@ export GOPATH="$(pwd)/go/"
 export PKGSRC="github.com/yggdrasil-network/yggdrasil-go/src/yggdrasil"
 export PKGNAME="%{name}"
 export PKGVER="%{version}"
-./build -t -l "-linkmode=external"
+go build -buildmode=pie ./cmd/yggdrasil
+go build -buildmode=pie ./cmd/yggdrasilctl
 
 %install
 rm -rf %{buildroot}
