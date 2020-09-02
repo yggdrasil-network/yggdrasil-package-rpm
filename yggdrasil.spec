@@ -37,18 +37,23 @@ export PKGVER="%{version}"
 rm -rf %{buildroot}
 install -m 0755 -D yggdrasil %{buildroot}/%{_bindir}/yggdrasil
 install -m 0755 -D yggdrasilctl %{buildroot}/%{_bindir}/yggdrasilctl
-install -m 0755 -D contrib/systemd/yggdrasil.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil.service
+install -m 0755 -D contrib/systemd/yggdrasil.service %{buildroot}/%{_unitdir}/yggdrasil.service
+install -m 0755 -D contrib/systemd/yggdrasil-default-config.service %{buildroot}/%{_unitdir}/yggdrasil-default-config.service
 
 %files
 %{_bindir}/yggdrasil
 %{_bindir}/yggdrasilctl
-%{_sysconfdir}/systemd/system/yggdrasil.service
+%{_unitdir}/yggdrasil.service
+%{_unitdir}/yggdrasil-default-config.service
 
 %post
 %systemd_post yggdrasil.service
+%systemd_post yggdrasil-default-config.service
 
 %preun
 %systemd_preun yggdrasil.service
+%systemd_preun yggdrasil-default-config.service
 
 %postun
 %systemd_postun_with_restart yggdrasil.service
+%systemd_postun_with_restart yggdrasil-default-config.service
