@@ -28,10 +28,9 @@ exit 0
 %setup -qn yggdrasil-go-%{version}
 
 %build
-export PKGSRC="github.com/yggdrasil-network/yggdrasil-go/src/yggdrasil"
 export PKGNAME="%{name}"
 export PKGVER="%{version}"
-./build -t -l "-linkmode=external"
+./build -t -p -l "-linkmode=external"
 
 %install
 rm -rf %{buildroot}
