@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.4.3
+Version:        0.4.4
 Release:        1%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
