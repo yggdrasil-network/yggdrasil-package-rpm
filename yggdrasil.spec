@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.5.0
+Version:        0.5.1
 Release:        1%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
@@ -31,7 +31,7 @@ exit 0
 export PKGNAME="%{name}"
 export PKGVER="%{version}"
 export GOPROXY="https://proxy.golang.org,direct"
-./build -t -p -l "-linkmode=external"
+LDFLAGS="" ./build -t -p -l "-linkmode=external"
 
 %install
 rm -rf %{buildroot}
