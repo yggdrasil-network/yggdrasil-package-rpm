@@ -1,5 +1,5 @@
 Name:           yggdrasil
-Version:        0.5.5
+Version:        0.5.6
 Release:        1%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
@@ -8,7 +8,7 @@ URL:            https://yggdrasil-network.github.io
 Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.gz/v%{version}
 
 %{?systemd_requires}
-BuildRequires:  systemd golang >= 1.20 git
+BuildRequires:  systemd golang >= 1.21 git
 Requires(pre):  shadow-utils
 Conflicts:      yggdrasil-develop
 
