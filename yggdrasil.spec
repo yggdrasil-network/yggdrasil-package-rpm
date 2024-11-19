@@ -43,12 +43,16 @@ install -m 0755 -D contrib/systemd/yggdrasil-default-config.service %{buildroot}
 %{_bindir}/yggdrasil
 %{_bindir}/yggdrasilctl
 %{_sysconfdir}/systemd/system/yggdrasil.service
+%{_sysconfdir}/systemd/system/yggdrasil-default-config.service
 
 %post
 %systemd_post yggdrasil.service
+%systemd_post yggdrasil-default-config.service
 
 %preun
 %systemd_preun yggdrasil.service
+%systemd_preun yggdrasil-default-config.service
 
 %postun
 %systemd_postun_with_restart yggdrasil.service
+%systemd_postun_with_restart yggdrasil-default-config.service
