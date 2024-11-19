@@ -9,7 +9,6 @@ Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.g
 
 %{?systemd_requires}
 BuildRequires:  systemd golang >= 1.21 git
-Requires(pre):  shadow-utils
 Conflicts:      yggdrasil-develop
 
 %description
