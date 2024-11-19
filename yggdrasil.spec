@@ -37,6 +37,7 @@ rm -rf %{buildroot}
 install -m 0755 -D yggdrasil %{buildroot}/%{_bindir}/yggdrasil
 install -m 0755 -D yggdrasilctl %{buildroot}/%{_bindir}/yggdrasilctl
 install -m 0755 -D contrib/systemd/yggdrasil.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil.service
+install -m 0755 -D contrib/systemd/yggdrasil-default-config.service %{buildroot}/%{_sysconfdir}/systemd/system/yggdrasil-default-config.service
 
 %files
 %{_bindir}/yggdrasil
