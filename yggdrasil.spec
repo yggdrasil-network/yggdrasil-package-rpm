@@ -46,6 +46,21 @@ install -m 0755 -D contrib/systemd/yggdrasil-default-config.service %{buildroot}
 %{_sysconfdir}/systemd/system/yggdrasil-default-config.service
 
 %post
+if [ -e %{_sysconfdir}/yggdrasil.conf ]; then
+    TMPDIR=$(mktemp -d)
+    %{_bindir}/yggdrasil -useconffile %{_sysconfdir}/yggdrasil.conf -normaliseconf > $TMPDIR/yggdrasil.conf
+    if ! cmp -s "%{_sysconfdir}/yggdrasil.conf" "$TMPDIR/yggdrasil.conf"; then
+        mv -f "$TMPDIR/yggdrasil.conf" "%{_sysconfdir}/yggdrasil.conf.rpmnew"
+        chmod 640 %{_sysconfdir}/yggdrasil.conf.rpmnew
+        echo "An updated %{_sysconfdir}/yggdrasil.conf was saved as %{_sysconfdir}/yggdrasil.conf.rpmnew"
+    fi
+    rm -rf $TMPDIR
+else
+    echo "Generating initial configuration file %{_sysconfdir}/yggdrasil.conf"
+    echo "Please familiarize yourself with this file before starting Yggdrasil"
+    %{_bindir}/yggdrasil -genconf > %{_sysconfdir}/yggdrasil.conf
+    chmod 640 %{_sysconfdir}/yggdrasil.conf
+fi
 %systemd_post yggdrasil.service
 %systemd_post yggdrasil-default-config.service
 
