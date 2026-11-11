@@ -3,7 +3,7 @@ Version:        0.5.15
 Release:        1%{?dist}
 Summary:        End-to-end encrypted IPv6 networking
 
-License:        GPLv3
+License:        LGPL-3.0-only
 URL:            https://yggdrasil-network.github.io
 Source:         https://codeload.github.com/yggdrasil-network/yggdrasil-go/tar.gz/v%{version}
 
